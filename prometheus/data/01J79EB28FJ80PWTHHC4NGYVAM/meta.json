@@ -1,0 +1,17 @@
+{
+	"ulid": "01J79EB28FJ80PWTHHC4NGYVAM",
+	"minTime": 1725796823101,
+	"maxTime": 1725804000000,
+	"stats": {
+		"numSamples": 48977,
+		"numSeries": 862,
+		"numChunks": 1471
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01J79EB28FJ80PWTHHC4NGYVAM"
+		]
+	},
+	"version": 1
+}

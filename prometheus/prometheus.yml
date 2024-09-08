@@ -1,0 +1,12 @@
+scrape_configs:
+  - job_name: 'nginx'
+    scrape_interval: 5s
+    static_configs:
+    # nginx-exporter
+      - targets: ['172.18.0.6:9113']
+
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+    # prometheus
+      - targets: ['localhost:9090']

@@ -1,0 +1,57 @@
+services:
+  mire:
+    image: mire-prod2
+    container_name: mire
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+    ports:
+      - "3000:3000"
+
+  nginx_proxy:
+    image: nginx:1.27.1-alpine-slim
+    container_name: nginx_proxy
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx_cache:/etc/nginx/nginx_cache:rw
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_PORT=80
+      - NGINX_PROXY=mire
+      - NGINX_PROXY_PORT=3000
+    depends_on:
+      - mire
+
+  prometheus:
+    image: prom/prometheus
+    user: root
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/data:/prometheus:rw
+    ports:
+      - "9090:9090"
+
+  nginx_exporter:
+    image: nginx/nginx-prometheus-exporter:1.3.0
+    container_name: nginx_exporter
+    command:
+      - -nginx.scrape-uri=http://nginx_proxy:8080/stub_status
+    ports:
+      - "9113:9113"
+    depends_on:
+      - prometheus
+      - nginx_proxy
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    ports:
+      - 3100:3000
+    env_file:
+      - .env
