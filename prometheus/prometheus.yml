@@ -3,7 +3,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
     # nginx-exporter
-      - targets: ['172.18.0.6:9113']
+      - targets: ['nginx_exporter:9113']
 
   - job_name: 'prometheus'
     scrape_interval: 5s
