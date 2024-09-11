@@ -8,10 +8,10 @@ services:
       - "3000:3000"
 
   nginx_proxy:
-    image: nginx:1.27.1-alpine-slim
+    image: openresty/openresty:1.21.4.1-0-alpine
     container_name: nginx_proxy
     volumes:
-      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - ./nginx_cache:/etc/nginx/nginx_cache:rw
     ports:
       - "8080:8080"
