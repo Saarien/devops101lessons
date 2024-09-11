@@ -5,6 +5,12 @@ scrape_configs:
     # nginx-exporter
       - targets: ['nginx_exporter:9113']
 
+  - job_name: 'nginx2'
+    scrape_interval: 5s
+    static_configs:
+    # nginx-exporter
+      - targets: ['nginx_proxy:8080']
+
   - job_name: 'prometheus'
     scrape_interval: 5s
     static_configs:

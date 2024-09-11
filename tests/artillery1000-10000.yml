@@ -2,8 +2,8 @@ config:
   target: "http://0.0.0.0:8080"
   phases:
     - duration: 10
-      arrivalRate: 50
-      maxVusers: 50
+      arrivalRate: 500
+      maxVusers: 500
   plugins:
     metrics-by-endpoint: {}  # Plugin to measure metrics by endpoint
   stats:
@@ -14,4 +14,4 @@ scenarios:
     - loop:
       - get:
           url: '/problems/slow-image'
-      count: 10
+      count: 100

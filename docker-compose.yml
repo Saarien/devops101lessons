@@ -8,7 +8,8 @@ services:
       - "3000:3000"
 
   nginx_proxy:
-    image: openresty/openresty:1.21.4.1-0-alpine
+    # image: openresty/openresty:1.21.4.1-0-alpine
+    image: openresty_luaprom
     container_name: nginx_proxy
     volumes:
       - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
@@ -31,6 +32,8 @@ services:
       - ./prometheus/data:/prometheus:rw
     ports:
       - "9090:9090"
+    depends_on:
+      - nginx_proxy
 
   nginx_exporter:
     image: nginx/nginx-prometheus-exporter:1.3.0
