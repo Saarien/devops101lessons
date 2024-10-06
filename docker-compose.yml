@@ -1,6 +1,9 @@
 services:
   mire:
-    image: mire-prod2
+    # image: mire
+    build:
+      context: .
+      dockerfile: Dockerfile.mire
     container_name: mire
     environment:
       - HOST=0.0.0.0
@@ -9,7 +12,10 @@ services:
 
   nginx_proxy:
     # image: openresty/openresty:1.21.4.1-0-alpine
-    image: openresty_luaprom
+    # image: openresty_luaprom
+    build:
+      context: .
+      dockerfile: Dockerfile.openresty
     container_name: nginx_proxy
     volumes:
       - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro

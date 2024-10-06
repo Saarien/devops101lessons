@@ -5,14 +5,21 @@ scrape_configs:
     # nginx-exporter
       - targets: ['nginx_exporter:9113']
 
-  - job_name: 'nginx2'
+  - job_name: 'nginx_lua'
     scrape_interval: 5s
     static_configs:
-    # nginx-exporter
+    # nginx-lua
       - targets: ['nginx_proxy:8080']
 
+  - job_name: 'mire'
+    scrape_interval: 15s
+    static_configs:
+    # mire
+      - targets: ['mire:3000']
+
+
   - job_name: 'prometheus'
-    scrape_interval: 5s
+    scrape_interval: 15s
     static_configs:
     # prometheus
       - targets: ['localhost:9090']
