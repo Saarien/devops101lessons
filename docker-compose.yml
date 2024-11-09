@@ -25,6 +25,7 @@ services:
     volumes:
       - ./config/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
       - ./nginx_cache:/etc/nginx/nginx_cache:rw
+      - ./logs/prometheus.log:/usr/local/openresty/nginx/logs/prometheus.log:rw
     ports:
       - "8080:8080"
     environment:
@@ -71,3 +72,14 @@ services:
       - 3100:3000
     env_file:
       - .env
+
+  #nginx_log_exporter:
+  #  <<: *global
+  #  image: tgbyte/mtail
+  #  depends_on:
+  #    - nginx_proxy
+  #  volumes:
+  #    - ./logs/prometheus.log:/mnt/nginxlogs/prometheus.log:ro
+  #  ports:
+  #    - 3903:3903
+    
